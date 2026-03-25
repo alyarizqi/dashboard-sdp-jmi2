@@ -583,24 +583,77 @@ body{background:var(--bg);color:var(--text1);font-family:var(--font-mono);font-s
     </div>
   </div>
 
-  <div class="section-label" style="margin-top:12px">Register Map — PM5350</div>
-  <div class="esp-panel">
+  <div class="section-label" style="margin-top:12px">Register Map — PM2100 (Modbus address = display address - 1)</div>
+
+  <!-- Tegangan L-L -->
+  <div class="section-label" style="font-size:9px;margin-top:8px">Tegangan Fasa-Fasa (L-L) · addr 3019 · 6 reg</div>
+  <div class="esp-panel" style="padding:8px">
     <div class="esp-grid" style="grid-template-columns:repeat(3,1fr)">
-      <div class="esp-item"><div class="k">Volt L-L (3020)</div><div class="v" style="color:var(--accent);font-size:11px">6 reg · RS/ST/TR</div></div>
-      <div class="esp-item"><div class="k">Current (3000)</div><div class="v" style="color:var(--accent);font-size:11px">6 reg · R/S/T</div></div>
-      <div class="esp-item"><div class="k">Volt L-N (3028)</div><div class="v" style="color:var(--accent);font-size:11px">8 reg · R/S/T</div></div>
-      <div class="esp-item"><div class="k">Current 3P (30010)</div><div class="v" style="color:var(--accent);font-size:11px">2 reg · 3P avg</div></div>
-      <div class="esp-item"><div class="k">Power (3054)</div><div class="v" style="color:var(--accent);font-size:11px">8 reg · R/S/T/3P</div></div>
-      <div class="esp-item"><div class="k">Energy (3204)</div><div class="v" style="color:var(--accent);font-size:11px">4 reg · kWh</div></div>
-      <div class="esp-item"><div class="k">THD Amp (21300)</div><div class="v" style="color:var(--purple);font-size:11px">16 reg · R/S/T+3P</div></div>
-      <div class="esp-item"><div class="k">THD V-LL (21322)</div><div class="v" style="color:var(--purple);font-size:11px">6 reg · RS/ST/TR</div></div>
-      <div class="esp-item"><div class="k">THD V-LN (21330)</div><div class="v" style="color:var(--purple);font-size:11px">8 reg · R/S/T</div></div>
-      <div class="esp-item"><div class="k">OV THD Cfg (14541)</div><div class="v" style="color:var(--warn);font-size:11px">14 reg · pickup/drop</div></div>
-      <div class="esp-item"><div class="k">Phase Loss (14561)</div><div class="v" style="color:var(--warn);font-size:11px">14 reg · R/S/T</div></div>
-      <div class="esp-item"><div class="k">OV Volt LL (14081)</div><div class="v" style="color:var(--danger);font-size:11px">14 reg · RS/ST/TR</div></div>
-      <div class="esp-item"><div class="k">UV Volt LL (14101)</div><div class="v" style="color:var(--warn);font-size:11px">14 reg · RS/ST/TR</div></div>
-      <div class="esp-item"><div class="k">OV Volt LN (14121)</div><div class="v" style="color:var(--danger);font-size:11px">14 reg · R/S/T</div></div>
-      <div class="esp-item"><div class="k">UV Volt LN (14141)</div><div class="v" style="color:var(--warn);font-size:11px">14 reg · R/S/T</div></div>
+      <div class="esp-item"><div class="k">V R-S · reg 3019–3020</div><div class="v" style="color:var(--accent);font-size:11px">display: 3020 · float32</div></div>
+      <div class="esp-item"><div class="k">V S-T · reg 3021–3022</div><div class="v" style="color:var(--accent);font-size:11px">display: 3022 · float32</div></div>
+      <div class="esp-item"><div class="k">V T-R · reg 3023–3024</div><div class="v" style="color:var(--accent);font-size:11px">display: 3024 · float32</div></div>
+    </div>
+  </div>
+
+  <!-- Arus per fasa -->
+  <div class="section-label" style="font-size:9px;margin-top:4px">Arus Per Fasa (Current) · addr 2999 · 6 reg</div>
+  <div class="esp-panel" style="padding:8px">
+    <div class="esp-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="esp-item"><div class="k">I-R · reg 2999–3000</div><div class="v" style="color:var(--accent2);font-size:11px">display: 3000 · float32</div></div>
+      <div class="esp-item"><div class="k">I-S · reg 3001–3002</div><div class="v" style="color:var(--accent2);font-size:11px">display: 3002 · float32</div></div>
+      <div class="esp-item"><div class="k">I-T · reg 3003–3004</div><div class="v" style="color:var(--accent2);font-size:11px">display: 3004 · float32</div></div>
+    </div>
+  </div>
+
+  <!-- Tegangan L-N -->
+  <div class="section-label" style="font-size:9px;margin-top:4px">Tegangan Fasa-Netral (L-N) · addr 3027 · 8 reg</div>
+  <div class="esp-panel" style="padding:8px">
+    <div class="esp-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="esp-item"><div class="k">V-R · reg 3027–3028</div><div class="v" style="color:var(--accent);font-size:11px">display: 3028 · float32</div></div>
+      <div class="esp-item"><div class="k">V-S · reg 3029–3030</div><div class="v" style="color:var(--accent);font-size:11px">display: 3030 · float32</div></div>
+      <div class="esp-item"><div class="k">V-T · reg 3031–3032</div><div class="v" style="color:var(--accent);font-size:11px">display: 3032 · offset [4]</div></div>
+    </div>
+  </div>
+
+  <!-- Arus 3P & Daya -->
+  <div class="section-label" style="font-size:9px;margin-top:4px">Arus 3P & Daya Aktif</div>
+  <div class="esp-panel" style="padding:8px">
+    <div class="esp-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="esp-item"><div class="k">I-3P · addr 3009 · 2 reg</div><div class="v" style="color:var(--accent2);font-size:11px">display: 3010 · float32</div></div>
+      <div class="esp-item"><div class="k">P-R · addr 3053 · reg[0-1]</div><div class="v" style="color:var(--danger);font-size:11px">display: 3054 · float32</div></div>
+      <div class="esp-item"><div class="k">P-S · addr 3053 · reg[2-3]</div><div class="v" style="color:var(--accent2);font-size:11px">display: 3056 · float32</div></div>
+      <div class="esp-item"><div class="k">P-T · addr 3053 · reg[4-5]</div><div class="v" style="color:var(--accent);font-size:11px">display: 3058 · float32</div></div>
+      <div class="esp-item"><div class="k">P-3P · addr 3053 · reg[6-7]</div><div class="v" style="color:var(--purple);font-size:11px">display: 3060 · float32</div></div>
+      <div class="esp-item"><div class="k">Energy · addr 3203 · 4 reg</div><div class="v" style="color:var(--accent2);font-size:11px">display: 3204 · int64 /1000</div></div>
+    </div>
+  </div>
+
+  <!-- THD -->
+  <div class="section-label" style="font-size:9px;margin-top:4px">THD · addr 21299–21329</div>
+  <div class="esp-panel" style="padding:8px">
+    <div class="esp-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="esp-item"><div class="k">THD I-R · 21299 · reg[0-1]</div><div class="v" style="color:var(--purple);font-size:11px">display: 21300 · float32</div></div>
+      <div class="esp-item"><div class="k">THD I-S · 21299 · reg[2-3]</div><div class="v" style="color:var(--purple);font-size:11px">display: 21302 · float32</div></div>
+      <div class="esp-item"><div class="k">THD I-T · 21299 · reg[4-5]</div><div class="v" style="color:var(--purple);font-size:11px">display: 21304 · float32</div></div>
+      <div class="esp-item"><div class="k">THD V-LL RS · 21321 · reg[0-1]</div><div class="v" style="color:var(--purple);font-size:11px">display: 21322 · float32</div></div>
+      <div class="esp-item"><div class="k">THD V-LL ST · 21321 · reg[2-3]</div><div class="v" style="color:var(--purple);font-size:11px">display: 21324 · float32</div></div>
+      <div class="esp-item"><div class="k">THD V-LL TR · 21321 · reg[4-5]</div><div class="v" style="color:var(--purple);font-size:11px">display: 21326 · float32</div></div>
+      <div class="esp-item"><div class="k">THD V-LN R · 21329 · reg[0-1]</div><div class="v" style="color:var(--purple);font-size:11px">display: 21330 · float32</div></div>
+      <div class="esp-item"><div class="k">THD V-LN S · 21329 · reg[2-3]</div><div class="v" style="color:var(--purple);font-size:11px">display: 21332 · float32</div></div>
+      <div class="esp-item"><div class="k">THD V-LN T · 21329 · reg[6-7]</div><div class="v" style="color:var(--purple);font-size:11px">display: 21336 · offset [6]</div></div>
+    </div>
+  </div>
+
+  <!-- Alarm Config -->
+  <div class="section-label" style="font-size:9px;margin-top:4px">Alarm Config · addr 14080–14540</div>
+  <div class="esp-panel" style="padding:8px">
+    <div class="esp-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="esp-item"><div class="k">OV THD · addr 14540 · 14 reg</div><div class="v" style="color:var(--warn);font-size:11px">display: 14541 · [0-2]×0.01</div></div>
+      <div class="esp-item"><div class="k">Phase Loss · addr 14560 · 14 reg</div><div class="v" style="color:var(--warn);font-size:11px">display: 14561 · [0-2]×0.1</div></div>
+      <div class="esp-item"><div class="k">OV Volt L-L · addr 14080 · 14 reg</div><div class="v" style="color:var(--danger);font-size:11px">display: 14081 · [0-2]×0.1</div></div>
+      <div class="esp-item"><div class="k">UV Volt L-L · addr 14100 · 14 reg</div><div class="v" style="color:var(--warn);font-size:11px">display: 14101 · [0-2]×0.1</div></div>
+      <div class="esp-item"><div class="k">OV Volt L-N · addr 14120 · 14 reg</div><div class="v" style="color:var(--danger);font-size:11px">display: 14121 · [0-2]×0.1</div></div>
+      <div class="esp-item"><div class="k">UV Volt L-N · addr 14140 · 14 reg</div><div class="v" style="color:var(--warn);font-size:11px">display: 14141 · [0-2]×0.1</div></div>
     </div>
   </div>
 </div>
